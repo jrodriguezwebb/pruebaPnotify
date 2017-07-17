@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prueba Pnotify</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+        <!-- <link media="screen" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"> -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+        <link rel="stylesheet" type="text/css" href="css/pnotify.custom.min.css" >        
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <script type="text/javascript" src="js/pnotify.custom.min.js" ></script>
+        <script type="text/javascript">
+            function notificacion(titulo,text,tipo,cb)
+            {
+                PNotify.desktop.permission();
+                if (typeof stack_context === "undefined") stack_context = {
+                    "dir1": "down",
+                    "dir2": "left",
+                    //"push":"top",
+                    "context": $("body")
+                };
+                notice = new PNotify({
+                        title: titulo,
+                        text: text,
+                        delay: 1500,
+                        swipe_dismiss: true,
+                        stack: stack_context,
+                        animate_speed: "fast",
+                        addclass: "stack-topright",
+                        //addclass: "stack-topleft",
+                        /*styling : "bootstrap3",*/
+                        styling: "brighttheme",
+                        after_close: function(notice, timer_hide) {
+                            //funcion callback
+                            if(cb)
+                            {
+                                cb();
+                            }
+                        },
+                        type : tipo/*,          
+                        desktop: {
+                            desktop: true
+                        }*/
+                    }); 
+                notice.get().click(function() {
+                    notice.remove();
+                });
+            } 
+        </script>
+    </head>
+
+    <body>
+        <input type="button" name="prueba" onclick="notificacion('Aviso','Mensaje a notificar','success');" value="Abrir Ventana" class="btn btn-success">        
+    </body>
+</html>
